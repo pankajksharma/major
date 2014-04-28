@@ -9,8 +9,10 @@ class ModelTester(object):
 		self._n = self._stats["N"]
 		self._gf = self._stats["freq"]
 		self._knn = KNN(trained_file)
+		self.result = {}
 
 	def test(self):
+		c = 0 
 		while True:
 			line = self._doc.readline()
 			if not line:
@@ -22,7 +24,21 @@ class ModelTester(object):
 			labels, features = parts[0], ' '.join(parts[1:])
 			tfidf = self.get_tfidf(features)
 			top_cats = self._knn.find_knn(tfidf)
-			print top_cats
+			#print top_cats
+			print c 
+			c =c +  1
+			for i in top_cats:
+				try :
+					self.result[str(i)].append(line.replace('\n', ''))
+				except : 
+					self.result[str(i)] = []
+					self.result[str(i)].append(line.replace('\n', ''))
+				
+	def write(self, output_file ) :
+		fp = open(output_file+'.json', 'w')
+		json.dump(self.result, fp)
+		fp.close()		
+			
 
 	def get_tfidf(self, features):
 		features = re.findall(r'\d+:\d+', features)

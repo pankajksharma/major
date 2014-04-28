@@ -2,6 +2,7 @@ from model_tester import ModelTester
 
 mt = ModelTester('tr.csv', 'tf-idf.csv', 'global.csv')
 mt.test()
+mt.write("output")
 
 # from knn import KNN
 
