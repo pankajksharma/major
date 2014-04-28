@@ -1,6 +1,6 @@
 from model_tester import ModelTester
 
-mt = ModelTester('/home/om/Desktop/train.csv', 'tf-idf.csv', 'global.csv')
+mt = ModelTester('tr.csv', 'tf-idf.csv', 'global.csv')
 mt.test()
 
 # from knn import KNN
