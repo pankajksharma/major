@@ -1,22 +1,49 @@
-import re
+import re, os
 
 class KNN(object):
 	def __init__(self, tf_idf_file, n=5):
 		self._doc = open(tf_idf_file)
 		self._n = n
+		self.get_docs()
+
+	def get_docs(self):
+		cats = []
+		docs = []
+		for o in os.listdir('model/'):
+			cats.append(o.split('.')[0])
+		while True:
+			line = self._doc.readline()
+			if not line:
+				break
+			parts = line.split()
+			if len(parts) <= 2:
+				continue
+			labels, features = parts[0].split(','), ' '.join(parts)			
+			if any(labels in cats):
+				docs.append(features)
+		self._docs = docs
 
 	def find_knn(self, doc):
 		self._doc.seek(0)
 		cos_distances = {}
 		doc_features = re.findall(r'\d+:\d+\.\d+', doc)
-		while True:
+		for fil in os.listdir('model/'):
+			doc2 = json.read()
+		for doc in self._docs:
+			labels, features = parts[0].split(','), ' '.join(parts[1:])			
+			features = re.findall(r'\d+:\d+\.\d+', features)
+			if len(features) < 1:
+				continue
+			cos_distances[str(labels)] = self._cos_distance(doc_features, features)
+			# cos_distances[]
+		'''		while True:
 			line = self._doc.readline()
 			if not line:
 				break
 			features = re.findall(r'\d+:\d+\.\d+', line)
 			if len(features) < 1:
 				continue
-			cos_distances[line] = self._cos_distance(doc_features, features)
+			cos_distances[line] = self._cos_distance(doc_features, features)'''
 		scd = sorted(cos_distances, key=cos_distances.get)
 		sv = cos_distances.values()
 		sv.sort()

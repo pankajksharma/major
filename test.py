@@ -1,6 +1,6 @@
 from model_tester import ModelTester
 
-mt = ModelTester('tr.csv', 'tf-idf.csv', 'global.csv')
+mt = ModelTester('test.csv', 'tf-idf-full.csv', 'global-full.csv')
 mt.test()
 mt.write("output")
 

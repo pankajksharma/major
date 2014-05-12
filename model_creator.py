@@ -5,6 +5,7 @@ class ModelCreator(object):
 		self._doc = open(tf_idf_file)
 
 	def create(self, out_dir='model/'):
+		count=0
 		while True:
 			line = self._doc.readline()
 			if not line:
@@ -33,4 +34,5 @@ class ModelCreator(object):
 				fp = open(out_dir+str(label)+'.json', 'w')
 				json.dump(label_model, fp)
 				fp.close()
-
+			if count % 100 == 0 : print count 
+			count=count+1

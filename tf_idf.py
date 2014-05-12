@@ -19,6 +19,7 @@ class TfIdf(object):
 		return self._no_of_docs, self._global_freq
 
 	def _fill_global_stats(self):
+		c = 0 
 		while True:
 			line = self.doc.readline()
 			if not line:
@@ -30,11 +31,15 @@ class TfIdf(object):
 				try:
 					self._global_freq[f] += 1
 				except KeyError:
-					self._global_freq[f] = 1	
+					self._global_freq[f] = 1
+			if c %10000 == 0 : print c 
+			c=c+1
+
 			
 	def _save_tf_idf(self, out_file_name):
 		of = open(out_file_name, 'w')
 		self.doc.seek(0)
+		c = 0 
 		while True:
 			line = self.doc.readline()
 			if not line:
@@ -42,8 +47,10 @@ class TfIdf(object):
 			parts = line.split()
 			if len(parts) <= 1:
 				continue
+			c+=1
 			out_line = self._get_out_line(parts)
 			of.write(out_line)
+			if c % 10000 == 0 : print c 
 		of.close()
 
 	def _get_out_line(self, parts):
