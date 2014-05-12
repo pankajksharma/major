@@ -29,15 +29,14 @@ class ModelTester(object):
 			tfidf = self.get_tfidf(features)
 			top_cats = self._knn.find_knn(tfidf)
 
-			'''
-			for i in top_cats:
-				l = line.split(" ")
-				try :
-					self.result[str(i)].append(line.replace('\n', ''))
-				except : 
-					self.result[str(i)] = []
-					self.result[str(i)].append(line.replace('\n', ''))
-			'''	
+			# for i in top_cats:
+			# 	l = line.split(" ")
+			# 	try :
+			# 		self.result[str(i)].append(line.replace('\n', ''))
+			# 	except : 
+			# 		self.result[str(i)] = []
+			# 		self.result[str(i)].append(line.replace('\n', ''))
+			
 			stri = str(id)+","
 			for i in top_cats : 
 				stri=stri+" "+str(i)

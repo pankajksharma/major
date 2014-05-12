@@ -9,19 +9,26 @@ class KNN(object):
 	def get_docs(self):
 		cats = []
 		docs = []
+		c=0
+
 		for o in os.listdir('model/'):
 			cats.append(o.split('.')[0])
 		while True:
+			if c% 10000 == 0 : print c 
 			line = self._doc.readline()
 			if not line:
 				break
 			parts = line.split()
 			if len(parts) <= 2:
 				continue
-			labels, features = parts[0].split(','), ' '.join(parts)			
-			if any(labels in cats):
+			labels, features = parts[0].split(','), ' '.join(parts)		
+				
+			if any(labels) in cats:
 				docs.append(features)
+			c=c+1
 		self._docs = docs
+		open("calculateddata.json").write(docs)
+
 
 	def find_knn(self, doc):
 		self._doc.seek(0)
