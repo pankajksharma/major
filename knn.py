@@ -23,11 +23,19 @@ class KNN(object):
 				continue
 			labels, features = parts[0].split(','), ' '.join(parts)		
 				
-			if any(labels) in cats:
-				docs.append(features)
+			for i in labels :
+				if i in cats:
+					docs.append(features)
 			c=c+1
+			
+			if c % 2000 == 0 :
+				files = open("calculateddata.json",'w')
+				files.write(str(docs))
+				files.close()
+
+		open("calculateddata.json",'w').write(docs)
 		self._docs = docs
-		open("calculateddata.json").write(docs)
+		
 
 
 	def find_knn(self, doc):
@@ -42,15 +50,15 @@ class KNN(object):
 			if len(features) < 1:
 				continue
 			cos_distances[str(labels)] = self._cos_distance(doc_features, features)
-			# cos_distances[]
-		'''		while True:
-			line = self._doc.readline()
-			if not line:
-				break
-			features = re.findall(r'\d+:\d+\.\d+', line)
-			if len(features) < 1:
-				continue
-			cos_distances[line] = self._cos_distance(doc_features, features)'''
+		# cos_distances[]
+		#   while True:
+		# 	line = self._doc.readline()
+		# 	if not line:
+		# 		break
+		# 	features = re.findall(r'\d+:\d+\.\d+', line)
+		# 	if len(features) < 1:
+		# 		continue
+		# 	cos_distances[line] = self._cos_distance(doc_features, features)
 		scd = sorted(cos_distances, key=cos_distances.get)
 		sv = cos_distances.values()
 		sv.sort()
