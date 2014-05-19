@@ -33,9 +33,9 @@ while True:
 	if c % 1000 == 0: print c
 	c += 1
 
-for k,v in model.iteritems():
-	for k1,v1 in v.iteritems():
-		model[k][k1] /= labels_occ[k][k1]
+# for k,v in model.iteritems():
+# 	for k1,v1 in v.iteritems():
+# 		model[k][k1] /= labels_occ[k][k1]
 
 fi.close()
 f=open('model.json', 'w')
