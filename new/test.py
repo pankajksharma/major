@@ -3,7 +3,7 @@ from iterate import *
 
 def get_Thresholds():
 	thres = []
-	file = open("results/threshold.csv")
+	file = open("threshold")
 	for i in xrange(0, 1000):
 		line = float(file.readline())
 		if i  % 50 == 0:
@@ -35,8 +35,8 @@ def cos_dis(obj1, obj2):
 		sq2 += v*v
 	return num/((sq1**0.5)*(sq2**0.5))
 
-def generate(threshold):
-	fi=open('model-iterated.json', 'r')
+def generate(threshold,n):
+	fi=open('model-iterated'+str(n)+'.json', 'r')
 	models = json.loads(fi.read())
 	fi.close()
 	fi = open('test-exp1.svm')
@@ -63,9 +63,9 @@ def generate(threshold):
 		for label, model in models.iteritems():
 			coses[label] = cos_dis(model, doc)
 		# print coses
-
 		top_labels = sorted(coses, key=coses.get)
 		top_labels.reverse()
+
 		#print top_labels[:n], labels
 		# line_no , True 
 		# break
@@ -88,7 +88,7 @@ n = 10
 file = open("accuracy","w")
 threshold  = get_Thresholds()
 for th in threshold : 
-	iterate_model(flaot(n))
+	iterate_model(float(n))
 	m=generate("threshold"+str(n))
 	print "Accuracy is : ",m
 	file.write(str(m)+","+str(th)+"\n")

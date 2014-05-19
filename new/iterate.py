@@ -1,9 +1,10 @@
 import json,re
 
 def remove_out_liers(model, doc,threshold):
+	# lis =[]
 	for k,v in doc.iteritems():
 		cos = cos_dis(model, {k:v})
-		if cos not in lis : lis.append(cos)
+		# if cos not in lis : lis.append(cos)
 		if cos < threshold:
 			model[k] -= v
 	return model
@@ -57,10 +58,9 @@ def iterate_model(n):
 
 		if c % 1000 == 0: 
 			print c
-			write(lis)
+			# write(lis)
 		c += 1
 	fi.close()
-
 	fi = open("data/model-iterated"+str(n)+".json", "w")
 	json.dump(models, fi)
 	fi.close()
