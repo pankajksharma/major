@@ -30,8 +30,7 @@ def cos_dis(obj1, obj2):
 		sq2 += v*v
 	return num/((sq1**0.5)*(sq2**0.5))
 
-
-def iterate_model(n):
+def iterate_model(n,name):
 	fi = open("model.json", "r")
 	models = json.loads(fi.read())
 	fi.close()
@@ -48,7 +47,8 @@ def iterate_model(n):
 			continue
 		labels, features = parts[0].split(','), parts[1:]
 		for label in labels:
-			model = models[label]
+			try :model = models[label]
+			except :continue
 			doc = {}
 			for feature in features:
 				f,w = feature.split(':')
@@ -61,7 +61,7 @@ def iterate_model(n):
 			# write(lis)
 		c += 1
 	fi.close()
-	fi = open("data/model-iterated"+str(n)+".json", "w")
+	fi = open("data/model-iterated"+str(name)+".json", "w")
 	json.dump(models, fi)
 	fi.close()
 

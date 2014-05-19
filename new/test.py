@@ -35,14 +35,16 @@ def cos_dis(obj1, obj2):
 		sq2 += v*v
 	return num/((sq1**0.5)*(sq2**0.5))
 
-def generate(threshold,n):
-	fi=open('model-iterated'+str(n)+'.json', 'r')
+def generate(thres):
+
+	fi=open("data/model-iterated"+str(thres)+".json", "r")
 	models = json.loads(fi.read())
 	fi.close()
+
 	fi = open('test-exp1.svm')
-	fresult = open("results/"+str(threshold)+".csv","w")
-	c = 0
-	true_count = 0 
+	fresult = open("results/"+str(thres)+".csv","w")
+	c = 0.0
+	true_count = 0.0
 	while True:
 		line = fi.readline()
 		if not line:
@@ -87,9 +89,12 @@ n = 10
 #threshold = float(raw_input())
 file = open("accuracy","w")
 threshold  = get_Thresholds()
-for th in threshold : 
-	iterate_model(float(n))
-	m=generate("threshold"+str(n))
-	print "Accuracy is : ",m
-	file.write(str(m)+","+str(th)+"\n")
+
+for  i in xrange(6,20) :
+	print "Generate model"
+	iterate_model(float(threshold[i]),i)
+	print "Test"
+	m=generate(str(i))
+	print "Accuracy is : ",m ," Threshold",threshold[i]
+	file.write(str(m)+","+str(threshold[i])+str(i)+"\n")
 file.close()
