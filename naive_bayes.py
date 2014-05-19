@@ -19,4 +19,7 @@ class NB(object):
 					prob += model[term]
 				except:
 					pass
-			cats_prob[cat] 
+			cats_prob[cat] = prob
+		top_cats = sorted(cats_prob, key=cats_prob.get)
+		top_cats.reverse()
+		return top_cats[:self._max_cat_couts]
