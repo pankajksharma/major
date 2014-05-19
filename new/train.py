@@ -3,6 +3,7 @@ fi=open('train-exp1.svm', 'r')
 model = {}
 labels_occ = {}
 c  = 0
+result = open("results/threshold","w")
 while True:
 	line = fi.readline()
 	if not line:
