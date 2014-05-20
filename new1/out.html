@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([['Iteration', 'Accuracy'], [1.0, 86.74698795180001], [2.0, 86.74698795180001], [3.0, 87.95180722890001], [4.0, 86.74698795180001], [5.0, 89.15662650600001], [6.0, 86.74698795180001], [7.0, 86.74698795180001], [8.0, 87.95180722890001], [9.0, 85.54216867470001], [10.0, 84.33734939760001], [11.0, 86.74698795180001], [12.0, 85.54216867470001], [13.0, 83.13253012050001], [14.0, 83.13253012050001], [15.0, 84.33734939760001], [16.0, 83.13253012050001], [17.0, 83.13253012050001], [18.0, 83.13253012050001], [19.0, 84.33734939760001], [20.0, 84.33734939760001], [21.0, 81.9277108434], [22.0, 83.13253012050001], [23.0, 84.33734939760001], [24.0, 84.33734939760001], [25.0, 84.33734939760001], [26.0, 83.13253012050001], [27.0, 83.13253012050001], [28.0, 83.13253012050001], [29.0, 84.33734939760001], [30.0, 83.13253012050001], [31.0, 83.13253012050001], [32.0, 83.13253012050001], [33.0, 83.13253012050001], [34.0, 83.13253012050001], [35.0, 81.9277108434], [36.0, 83.13253012050001], [37.0, 84.33734939760001], [38.0, 83.13253012050001], [39.0, 83.13253012050001], [40.0, 84.33734939760001], [41.0, 83.13253012050001]]
+);
+
+        var options = {
+          title: 'Classifier Performance',
+	  curveType: 'function',
+    	  legend: { position: 'bottom' },
+	  vAxes:[
+			{}, // Nothing specified for axis 0
+			{title:'Accuracy',textStyle:{color: 'red'}} // Axis 1
+			],
+	  hAxes:[{}, // Nothing specified for axis 0 
+		{title:'Iteration',textStyle:{color: 'blue'}} // Axis 1
+	 		]
+
+        };
+
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="chart_div" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>
+
+
